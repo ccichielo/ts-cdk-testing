@@ -1,16 +1,22 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
+import * as cdk from "aws-cdk-lib";
+import { Construct } from "constructs";
+import { Code, Runtime } from "aws-cdk-lib/aws-lambda";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
-export class TsTestingStack extends cdk.Stack {
+export class TsSimpleStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const lambda = new cdk.aws_lambda.Function(this, "SimpleLambda", {
+      code: Code.fromInline("console.log()"),
+      handler: "index.handler",
+      runtime: Runtime.NODEJS_20_X,
+    });
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'TsTestingQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const bucket = new cdk.aws_s3.Bucket(this, "SimpleBucket", {
+      versioned: false,
+    });
+
+    bucket.grantRead(lambda);
   }
 }

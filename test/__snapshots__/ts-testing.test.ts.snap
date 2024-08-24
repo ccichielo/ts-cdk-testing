@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TsSimpleStack test suite Bucket properties with snapshot 1`] = `
+{
+  "SimpleBucket250AC437": {
+    "DeletionPolicy": "Retain",
+    "Type": "AWS::S3::Bucket",
+    "UpdateReplacePolicy": "Retain",
+  },
+}
+`;
